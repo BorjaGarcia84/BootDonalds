@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Donalds</title>
+</head>
+
+<body>
+    <div id="restaurante"></div>
+
+    <script>
+
+
+        let productos = {
+            menus: {
+                'Grand Big Boot': 8.5,
+                'Big Boot': 8,
+                'BootPollo': 7.50,
+                'Cuarto de libra': 7,
+                'BootRoyal Deluxe': 7
+            },
+            burgers: {
+                'Grand Big Boot': 6,
+                'Big Boot': 5.5,
+                'BootPollo': 5,
+                'Cuarto de libra': 4.5,
+                'BootRoyal Deluxe': 4.5
+            },
+            drinks: {
+                'CocaCola': 2,
+                'Fanta': 2,
+                'Agua': 1,
+                'Cerveza': 2.5
+            },
+            fries: 1,
+        };
+
+        let comanda;
+        let hamburguesas;
+        let bebida;
+        let patatas;
+        let menu;
+
+        let precioMenu = 0;
+        let precioHamburguesas = 0;
+        let precioBebida = 0;
+        let notaMenu = '';
+        let notaHamburguesas = '';
+        let notaBebida = '';
+        let notaPatatas = '';
+
+        let restaurante = document.getElementById('restaurante');
+
+
+        do {
+            comanda = parseInt(window.prompt('Menu principal: 1-Pedir menu 2-Pedir hambuergesa 3-Pedir bebida 4-Finalizar pedido'));
+            switch (comanda) {
+
+                case 1:
+                    menu = window.prompt('Elige un menu: 1-Gran Big Boot 2-Big Boot 3-BootPollo 4-Cuarto de libra 5- BootRoyal Deluxe');
+                    if (productos.menus[menu] !== undefined) {
+                        precioMenu += productos.menus[menu];
+                        notaMenu += menu + ' ';
+                        bebida = window.prompt('Elige la bebida: 1-CocaCola 2-Fanta 3-Agua 4-Cerveza. Las patatas estan incluidas con el menu');
+                        if (productos.drinks[bebida] !== undefined) {
+                            notaBebida += bebida + ' ';
+                            notaPatatas = 'patatas ';
+                        }
+                    }
+                    break;
+
+                case 2:
+                    hamburguesas = window.prompt('Elige un hamburguesa: 1-Gran Big Boot 2-Big Boot 3-BootPollo 4-Cuarto de libra 5- BootRoyal Deluxe');
+                    if (productos.burgers[hamburguesas] !== undefined) {
+                        precioHamburguesas += productos.burgers[hamburguesas];
+                        notaHamburguesas += hamburguesas + ' ';
+                    }
+                    break;
+
+                case 3:
+                    bebida = window.prompt('Elige una bebida 1-CocaCola 2-Fanta 3-Agua 4-Cerveza');
+                    if (productos.drinks[bebida] !== undefined) {
+                        precioBebida += productos.drinks[bebida];
+                        notaBebida += bebida + ' ';
+                    }
+                    break;
+
+                default:
+                    break;
+
+
+            }
+        } while (comanda !== 4)
+
+        restaurante.innerHTML = `
+            <h1> BOOT DONALDS </h1>
+            <p> Nota Menu : ${notaMenu} ${precioMenu} </p>
+            <p> Nota Hamburguesa : ${notaHamburguesas} ${precioHamburguesas}</p>
+            <p> Nota Bebida : ${notaBebida} ${precioBebida} </p>
+            <p> Nota Patatas : ${notaPatatas} </p>
+            <p> Precio Total : ${precioMenu + precioHamburguesas + precioBebida} </p>
+        `;
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
